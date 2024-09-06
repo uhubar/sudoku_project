@@ -17,19 +17,36 @@ function read() {
   return allVariants[0];
 }
 
-
 function solve() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+  for (let i = 0; i < 9; i++) {
+    const m = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+    const n = 3 * Math.floor(col / 3) + i % 3;
+    if (board[row][i] == k || board[i][col] == k || board[m][n] == k) {
+      return false;
+    }
+}
+return true;
 }
 
-function isSolved() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
+function isSolved(board, row, col, k) {
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (data[i][j] == '-') {
+        for (let k = 1; k <= 9; k++) {
+          if (solve(data, i, j, k)) {
+            data[i][j] = `${k}`;
+          if (isSolved(data)) {
+           return true;
+          } else {
+           data[i][j] = '-';
+          }
+         }
+       }
+       return false;
+     }
+   }
+  }
+  return true;
 }
 
 function prettyBoard(arr) {
@@ -37,3 +54,7 @@ function prettyBoard(arr) {
   arr.forEach((el) => console.log(" | " + el.join(" | ") + " | "));
   console.log(" ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
 }
+
+isSolved(read());
+console.log(read());
+console.log(prettyBoard(board));
