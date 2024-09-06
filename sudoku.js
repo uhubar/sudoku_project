@@ -14,7 +14,7 @@ function read() {
     }
     allVariants.push(subarray);
   }
-  return allVariants[0];
+  return allVariants;
 }
 const getArrPuzzle = read();
 
@@ -53,9 +53,9 @@ isSolved(getArrPuzzle);
 console.log(getArrPuzzle);
 
 function prettyBoard(arr) {
-  console.table(" -------------------------------------");
+  console.log(" -------------------------------------");
   arr.forEach((el) => console.table(" | " + el.join(" | ") + " | "));
   return(" -------------------------------------");
 }
-console.table(prettyBoard(getArrPuzzle));
-
+console.log(prettyBoard(getArrPuzzle));
+module.exports = { read, prettyBoard }
