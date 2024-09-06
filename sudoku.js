@@ -14,7 +14,7 @@ function read() {
     }
     allVariants.push(subarray);
   }
-  return allVariants[0];
+  return allVariants;
 }
 
 
@@ -37,3 +37,6 @@ function prettyBoard(arr) {
   arr.forEach((el) => console.log(" | " + el.join(" | ") + " | "));
   console.log(" ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
 }
+
+
+module.exports = { read, prettyBoard }
