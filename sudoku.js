@@ -1,8 +1,22 @@
+const fs = require("fs");
+const { EOL } = require("os");
+
 function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */ //test
+  const newText = fs.readFileSync("puzzles.txt", "utf-8");
+  const newTextArr = newText.split(EOL);
+  let allVariants = [];
+  for (let i = 0; i < newTextArr.length; i++) {
+    let subarray = [];
+    let size = 9;
+    for (let k = 0; k < newTextArr[i].length; k += size) {
+      const row = newTextArr[i].slice(k, k + size);
+      subarray.push(row.split(""));
+    }
+    allVariants.push(subarray);
+  }
+  return allVariants[0];
 }
+
 
 function solve() {
   /**
@@ -18,10 +32,8 @@ function isSolved() {
    */
 }
 
-function prettyBoard() {
-  /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Выводит в консоль/терминал судоку.
-   * Подумай, как симпатичнее его вывести.
-   */
+function prettyBoard(arr) {
+  console.log(" ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
+  arr.forEach((el) => console.log(" | " + el.join(" | ") + " | "));
+  console.log(" ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★");
 }
